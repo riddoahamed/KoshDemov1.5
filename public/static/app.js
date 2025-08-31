@@ -113,16 +113,37 @@ function handleSignup(event) {
   event.preventDefault()
   
   const phoneInput = document.getElementById('phone-input')
+  const nameInput = document.getElementById('name-input')
+  const ageInput = document.getElementById('age-input')
+  
   const phoneNumber = phoneInput?.value
+  const userName = nameInput?.value || 'User'
+  const userAge = ageInput?.value
   
   if (!phoneNumber || phoneNumber.length < 10) {
     alert('Please enter a valid phone number')
     return
   }
   
+  // Validate age if provided
+  if (userAge && (userAge < 18 || userAge > 100)) {
+    alert('Age must be between 18 and 100 years')
+    return
+  }
+  
+  // Store user data for personalization
+  const userData = {
+    phone: phoneNumber,
+    name: userName,
+    age: userAge || null
+  }
+  
+  // Store in localStorage for demo purposes
+  localStorage.setItem('koshUserData', JSON.stringify(userData))
+  
   // Simulate OTP success
   setTimeout(() => {
-    alert('OTP sent! (Auto-success in demo)')
+    alert(`OTP sent to +880${phoneNumber}! (Auto-success in demo)`)
     setTimeout(() => {
       navigateToScreen('home-empty')
     }, 1000)
@@ -256,8 +277,37 @@ function initPage() {
     updatePaymentAmount()
   }
   
+  // Personalize greeting based on stored user data
+  personalizeGreeting()
+  
+  // Show age-based recommendations on products page
+  if (currentPath === '/products') {
+    setTimeout(showAgeRecommendation, 100) // Small delay to ensure DOM is ready
+  }
+  
   // Add smooth scrolling behavior
   document.documentElement.style.scrollBehavior = 'smooth'
+}
+
+// Personalize greeting with user's name
+function personalizeGreeting() {
+  try {
+    const userData = JSON.parse(localStorage.getItem('koshUserData') || '{}')
+    const userName = userData.name || 'there'
+    
+    // Update greeting on home pages
+    const greetingElement = document.getElementById('user-greeting')
+    if (greetingElement) {
+      greetingElement.textContent = `Hi ${userName},`
+    }
+    
+    const greetingPortfolioElement = document.getElementById('user-greeting-portfolio')  
+    if (greetingPortfolioElement) {
+      greetingPortfolioElement.textContent = `Hi ${userName},`
+    }
+  } catch (error) {
+    console.log('No user data found, using default greeting')
+  }
 }
 
 // Page load initialization
@@ -305,13 +355,78 @@ const demoPortfolio = {
   ]
 }
 
+// Age-based investment recommendations
+function getAgeBasedRecommendation() {
+  try {
+    const userData = JSON.parse(localStorage.getItem('koshUserData') || '{}')
+    const age = parseInt(userData.age)
+    
+    if (!age) return null
+    
+    if (age >= 18 && age <= 25) {
+      return {
+        title: 'Perfect age to start!',
+        message: 'Young investors like you can take advantage of compound growth. Consider starting with our Gold Saver.',
+        recommended: 'gold'
+      }
+    } else if (age >= 26 && age <= 35) {
+      return {
+        title: 'Build your foundation',
+        message: 'Great time to diversify. Consider combining DPS for stability with Gold for growth.',
+        recommended: 'dps'
+      }
+    } else if (age >= 36 && age <= 50) {
+      return {
+        title: 'Wealth building phase',
+        message: 'Mutual Funds can provide professional management for your growing portfolio.',
+        recommended: 'mutual'
+      }
+    } else if (age > 50) {
+      return {
+        title: 'Steady growth focus',
+        message: 'DPS Builder offers reliable, predictable returns perfect for your investment goals.',
+        recommended: 'dps'
+      }
+    }
+  } catch (error) {
+    return null
+  }
+  
+  return null
+}
+
+// Show age-based recommendation on products page
+function showAgeRecommendation() {
+  const recommendation = getAgeBasedRecommendation()
+  if (!recommendation) return
+  
+  const productsContainer = document.querySelector('.space-y-4')
+  if (productsContainer) {
+    const recommendationCard = document.createElement('div')
+    recommendationCard.className = 'bg-gradient-to-r from-green-50 to-blue-50 border-2 border-kosh-green rounded-xl p-4 mb-4'
+    recommendationCard.innerHTML = `
+      <div class="flex items-start">
+        <div class="text-2xl mr-3">💡</div>
+        <div>
+          <h3 class="font-semibold text-gray-800 mb-1">${recommendation.title}</h3>
+          <p class="text-sm text-gray-600 mb-2">${recommendation.message}</p>
+          <span class="text-xs bg-kosh-green text-white px-2 py-1 rounded-full">Recommended for you</span>
+        </div>
+      </div>
+    `
+    productsContainer.insertBefore(recommendationCard, productsContainer.firstChild)
+  }
+}
+
 // Expose demo data globally for debugging
 window.koshDemo = {
   portfolio: demoPortfolio,
   navigateToScreen,
   selectAmount,
   selectPaymentMethod,
-  processPayment
+  processPayment,
+  personalizeGreeting,
+  getAgeBasedRecommendation
 }
 
 console.log('Kosh Prototype v2 loaded successfully!')

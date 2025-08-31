@@ -480,7 +480,7 @@ export const HomeWithPortfolioScreen = () => (
     <div class="bg-kosh-green text-white p-6 pt-12">
       <div class="flex justify-between items-center mb-6">
         <div>
-          <h1 class="text-xl font-semibold">Hi Ashraf,</h1>
+          <h1 class="text-xl font-semibold" id="user-greeting-portfolio">Hi there,</h1>
           <p class="text-green-100">great progress today!</p>
         </div>
         <button onclick="navigateToScreen('support')" class="text-white">

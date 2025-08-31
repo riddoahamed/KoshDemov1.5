@@ -116,19 +116,22 @@ const OnboardingScreen = () => (
 
 const SignupScreen = () => (
   <div class="min-h-screen bg-white p-6">
-    <div class="max-w-sm mx-auto pt-16">
-      <div class="mb-8">
+    <div class="max-w-sm mx-auto pt-12">
+      <div class="mb-6">
         <button onclick="navigateToScreen('onboarding')" class="text-gray-400 hover:text-gray-600">
           <i class="fas fa-arrow-left text-xl"></i>
         </button>
       </div>
       
       <h2 class="text-2xl font-bold text-gray-800 mb-2">Create your account</h2>
-      <p class="text-gray-600 mb-8">Enter your phone number to get started</p>
+      <p class="text-gray-600 mb-6">Fill in your details to get started</p>
       
       <form onsubmit="handleSignup(event)">
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Phone number</label>
+        {/* Phone Number - Required */}
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            Phone number <span class="text-red-500">*</span>
+          </label>
           <div class="flex">
             <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500">
               +880
@@ -137,8 +140,37 @@ const SignupScreen = () => (
                    id="phone-input"
                    class="flex-1 block w-full px-3 py-3 border border-gray-300 rounded-r-lg focus:ring-kosh-green focus:border-kosh-green"
                    placeholder="1XXXXXXXXX"
-                   maxlength="10" />
+                   maxlength="10"
+                   required />
           </div>
+        </div>
+
+        {/* Name - Optional */}
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            Full name <span class="text-gray-400 text-xs">(optional)</span>
+          </label>
+          <input type="text" 
+                 id="name-input"
+                 class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-kosh-green focus:border-kosh-green"
+                 placeholder="Enter your full name" />
+        </div>
+
+        {/* Age - Optional */}
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            Age <span class="text-gray-400 text-xs">(optional)</span>
+          </label>
+          <input type="number" 
+                 id="age-input"
+                 class="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-kosh-green focus:border-kosh-green"
+                 placeholder="Enter your age"
+                 min="18"
+                 max="100" />
+          <p class="text-xs text-gray-500 mt-1">
+            <i class="fas fa-lightbulb mr-1"></i>
+            We'll recommend investments based on your age
+          </p>
         </div>
         
         <button type="submit" 
@@ -147,9 +179,10 @@ const SignupScreen = () => (
         </button>
       </form>
       
-      <p class="text-xs text-gray-500 mt-6 text-center">
-        We use e-KYC when live. This is a demo.
-      </p>
+      <div class="mt-4 text-xs text-gray-500 text-center">
+        <p>We use e-KYC when live. This is a demo.</p>
+        <p class="mt-1">* Required fields</p>
+      </div>
     </div>
   </div>
 )
@@ -160,7 +193,7 @@ const HomeEmptyScreen = () => (
     <div class="bg-kosh-green text-white p-6 pt-12">
       <div class="flex justify-between items-center mb-6">
         <div>
-          <h1 class="text-xl font-semibold">Hi Ashraf,</h1>
+          <h1 class="text-xl font-semibold" id="user-greeting">Hi there,</h1>
           <p class="text-green-100">your portfolio is ready.</p>
         </div>
         <button onclick="navigateToScreen('support')" class="text-white">
