@@ -8,6 +8,7 @@ import {
 } from './screens'
 import { AdminDataScreen } from './admin'
 import { PilotSignupScreen, PilotSuccessScreen } from './pilot'
+import { DemoLandingScreen } from './demo'
 
 type AppData = {
   currentScreen: string
@@ -486,6 +487,10 @@ app.get('/pilot-signup', (c) => {
 
 app.get('/pilot-success', (c) => {
   return c.render(PilotSuccessScreen())
+})
+
+app.get('/demo', (c) => {
+  return c.render(DemoLandingScreen())
 })
 
 // API for pilot program signup (stores data locally for demo)

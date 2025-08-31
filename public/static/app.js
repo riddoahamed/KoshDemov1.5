@@ -29,7 +29,11 @@ function goBack() {
     'confirmation': 'payment',
     'portfolio': 'home-with-portfolio',
     'updates': 'home-with-portfolio',
-    'support': 'home-with-portfolio'
+    'support': 'home-with-portfolio',
+    'pilot-signup': 'support',
+    'pilot-success': 'pilot-signup',
+    'admin': 'home-empty',
+    'demo': '/'
   }
   
   const backRoute = backRoutes[window.location.pathname.replace('/', '')] || '/'

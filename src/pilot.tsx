@@ -4,7 +4,7 @@ export const PilotSignupScreen = () => (
     {/* Header */}
     <div class="bg-gradient-to-br from-kosh-green to-bd-green text-white p-6 pt-12">
       <div class="flex items-center mb-6">
-        <button onclick="goBack()" class="text-white hover:text-green-100 mr-4">
+        <button onclick="navigateToScreen('support')" class="text-white hover:text-green-100 mr-4">
           <i class="fas fa-arrow-left text-xl"></i>
         </button>
         <h1 class="text-xl font-semibold">Join Pilot Program</h1>
