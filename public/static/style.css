@@ -1,1 +1,402 @@
-h1 { font-family: Arial, Helvetica, sans-serif; }
+/* Kosh Prototype v2 - Custom Styles */
+
+/* Custom CSS Variables */
+:root {
+  --kosh-green: #10B981;
+  --kosh-dark: #1F2937;
+  --kosh-light: #F9FAFB;
+  --bd-green: #006A4E;
+  --bd-red: #F42A35;
+}
+
+/* Font Import - Bengali + English */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global Styles */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f9fafb;
+}
+
+/* Bengali Currency Symbol Styling */
+.taka-symbol {
+  font-weight: 600;
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Animation Classes */
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.bounce-animation {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+/* Loading Shimmer Effect */
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Custom Gradient Backgrounds */
+.bg-kosh-gradient {
+  background: linear-gradient(135deg, var(--kosh-green) 0%, var(--bd-green) 100%);
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+}
+
+.bg-blue-gradient {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.bg-purple-gradient {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+/* Custom Shadows */
+.shadow-kosh {
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1), 0 2px 4px -1px rgba(16, 185, 129, 0.06);
+}
+
+.shadow-gold {
+  box-shadow: 0 4px 6px -1px rgba(251, 191, 36, 0.1), 0 2px 4px -1px rgba(251, 191, 36, 0.06);
+}
+
+/* Button Hover Effects */
+.btn-kosh {
+  background-color: var(--kosh-green);
+  transition: all 0.3s ease;
+}
+
+.btn-kosh:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2);
+}
+
+.btn-kosh:active {
+  transform: translateY(0);
+}
+
+/* Card Hover Effects */
+.card-hover {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Investment Product Cards */
+.investment-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.investment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Portfolio Value Animation */
+.portfolio-value {
+  font-variant-numeric: tabular-nums;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Success State Animations */
+.success-animation {
+  animation: bounce 1s ease-in-out;
+}
+
+/* Loading States */
+.loading-spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid var(--kosh-green);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--kosh-green);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
+
+/* Mobile-First Responsive Design */
+@media (max-width: 640px) {
+  .mobile-padding {
+    padding: 1rem;
+  }
+  
+  .mobile-text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .desktop-shadow {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+}
+
+/* Focus States for Accessibility */
+button:focus,
+input:focus,
+a:focus {
+  outline: 2px solid var(--kosh-green);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .bg-kosh-green {
+    background-color: #000000;
+  }
+  
+  .text-kosh-green {
+    color: #000000;
+  }
+  
+  .border-kosh-green {
+    border-color: #000000;
+  }
+}
+
+/* Dark Mode Support (Future Enhancement) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --kosh-light: #1F2937;
+    --kosh-dark: #F9FAFB;
+  }
+}
+
+/* Custom Input Styles */
+.input-kosh {
+  border: 2px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.input-kosh:focus {
+  border-color: var(--kosh-green);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Carousel Specific Styles */
+.carousel-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-cards {
+  display: flex;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-card {
+  flex: 0 0 100%;
+  padding: 0 1rem;
+}
+
+/* FAQ Accordion Styles */
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.faq-content.show {
+  max-height: 200px;
+}
+
+/* Badge Styles */
+.badge-green {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--kosh-green);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-gold {
+  background-color: rgba(251, 191, 36, 0.1);
+  color: #f59e0b;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 4px;
+  background-color: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--kosh-green);
+  transition: width 0.3s ease;
+}
+
+/* Notification Styles */
+.notification {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* Safe Area Insets for iOS */
+@supports (padding: max(0px)) {
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Performance Optimizations */
+.gpu-acceleration {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Custom emoji sizing */
+.emoji-lg {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.emoji-xl {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.emoji-2xl {
+  font-size: 6rem;
+  line-height: 1;
+}
