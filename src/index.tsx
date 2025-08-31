@@ -7,6 +7,7 @@ import {
   HomeWithPortfolioScreen 
 } from './screens'
 import { AdminDataScreen } from './admin'
+import { PilotSignupScreen, PilotSuccessScreen } from './pilot'
 
 type AppData = {
   currentScreen: string
@@ -479,10 +480,18 @@ app.get('/admin', (c) => {
   return c.render(AdminDataScreen())
 })
 
-// API for pilot program signup (Google Form redirect)
+app.get('/pilot-signup', (c) => {
+  return c.render(PilotSignupScreen())
+})
+
+app.get('/pilot-success', (c) => {
+  return c.render(PilotSuccessScreen())
+})
+
+// API for pilot program signup (stores data locally for demo)
 app.get('/api/pilot-signup', (c) => {
-  // Redirect to Google Form for pilot program
-  return c.redirect('https://forms.gle/kosh-pilot-signup')
+  // In production, this would save to database and send emails
+  return c.redirect('/pilot-success')
 })
 
 export default app

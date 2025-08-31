@@ -362,11 +362,11 @@ export const SupportScreen = () => (
           <i class="fab fa-whatsapp text-4xl text-green-600 mb-4"></i>
           <h3 class="text-lg font-semibold text-gray-800 mb-2">Need Help?</h3>
           <p class="text-gray-600 mb-4">Chat with our support team on WhatsApp</p>
-          <a href="https://forms.gle/kosh-pilot-signup" target="_blank" 
-             class="inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition-colors">
+          <button onclick="navigateToScreen('pilot-signup')" 
+                  class="inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition-colors">
             <i class="fab fa-whatsapp mr-2"></i>
             WhatsApp Support
-          </a>
+          </button>
         </div>
       </div>
       
@@ -443,10 +443,10 @@ export const SupportScreen = () => (
         <p class="text-xs text-blue-600 mb-3">
           Be among the first to experience simple, transparent investing in Bangladesh.
         </p>
-        <a href="https://forms.gle/kosh-pilot-signup" target="_blank"
-           class="inline-block bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+        <button onclick="navigateToScreen('pilot-signup')"
+                class="inline-block bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
           Join Pilot Program
-        </a>
+        </button>
       </div>
     </div>
     

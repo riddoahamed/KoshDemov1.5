@@ -421,6 +421,95 @@ function showAgeRecommendation() {
   }
 }
 
+// Pilot signup handling
+function handlePilotSignup(event) {
+  event.preventDefault()
+  
+  const email = document.getElementById('pilot-email')?.value
+  const whatsapp = document.getElementById('pilot-whatsapp')?.value
+  const name = document.getElementById('pilot-name')?.value || 'Not provided'
+  const amount = document.getElementById('pilot-amount')?.value || 'Not specified'
+  const city = document.getElementById('pilot-city')?.value || 'Not specified'
+  
+  // Get investment interests
+  const interests = []
+  if (document.getElementById('interest-gold')?.checked) interests.push('Gold Saver')
+  if (document.getElementById('interest-dps')?.checked) interests.push('DPS Builder') 
+  if (document.getElementById('interest-mutual')?.checked) interests.push('Mutual Fund')
+  
+  if (!email || !whatsapp) {
+    alert('Please fill in your email and WhatsApp number')
+    return
+  }
+  
+  if (whatsapp.length < 10) {
+    alert('Please enter a valid WhatsApp number')
+    return
+  }
+  
+  // Create pilot signup data
+  const pilotData = {
+    email: email,
+    whatsapp: '+880' + whatsapp,
+    name: name,
+    interests: interests,
+    amount: amount,
+    city: city,
+    signupDate: new Date().toISOString(),
+    timestamp: Date.now()
+  }
+  
+  // Store pilot signup data
+  const existingPilotData = JSON.parse(localStorage.getItem('koshPilotSignups') || '[]')
+  existingPilotData.push(pilotData)
+  localStorage.setItem('koshPilotSignups', JSON.stringify(existingPilotData))
+  
+  // Simulate processing delay
+  const submitButton = document.querySelector('button[type="submit"]')
+  if (submitButton) {
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...'
+    submitButton.disabled = true
+  }
+  
+  setTimeout(() => {
+    navigateToScreen('pilot-success')
+  }, 1500)
+}
+
+// Get all pilot signups
+function getPilotSignups() {
+  return JSON.parse(localStorage.getItem('koshPilotSignups') || '[]')
+}
+
+// Export pilot signups as CSV
+function exportPilotSignups() {
+  const signups = getPilotSignups()
+  if (signups.length === 0) {
+    alert('No pilot signups to export')
+    return
+  }
+  
+  // Create CSV header
+  let csv = 'Email,WhatsApp,Name,Interests,Amount Range,City,Signup Date\n'
+  
+  // Add data rows
+  signups.forEach(signup => {
+    const interests = signup.interests.join('; ')
+    csv += `"${signup.email}","${signup.whatsapp}","${signup.name}","${interests}","${signup.amount}","${signup.city}","${new Date(signup.signupDate).toLocaleDateString()}"\n`
+  })
+  
+  // Download CSV
+  const blob = new Blob([csv], { type: 'text/csv' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `kosh-pilot-signups-${new Date().toISOString().split('T')[0]}.csv`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
+}
+
 // Admin panel functions
 function refreshData() {
   displayUserData()
@@ -541,11 +630,55 @@ function showCurrentRecommendation() {
   }
 }
 
+// Display pilot signups in admin panel
+function displayPilotSignups() {
+  const signups = getPilotSignups()
+  const countElement = document.getElementById('pilot-count')
+  const listElement = document.getElementById('pilot-signups-list')
+  
+  if (countElement) {
+    countElement.textContent = signups.length
+  }
+  
+  if (listElement) {
+    if (signups.length === 0) {
+      listElement.innerHTML = '<p class="text-center text-blue-600 text-sm">No pilot signups yet</p>'
+    } else {
+      listElement.innerHTML = signups.slice(-5).reverse().map(signup => `
+        <div class="bg-white border border-blue-200 rounded p-3 text-sm">
+          <div class="flex justify-between items-start mb-1">
+            <span class="font-medium text-blue-800">${signup.name}</span>
+            <span class="text-xs text-blue-600">${new Date(signup.signupDate).toLocaleDateString()}</span>
+          </div>
+          <div class="text-blue-700 mb-1">
+            📧 ${signup.email}<br/>
+            📱 ${signup.whatsapp}
+          </div>
+          <div class="text-xs text-blue-600">
+            ${signup.interests.length > 0 ? '💰 ' + signup.interests.join(', ') : 'No interests selected'}
+            ${signup.city !== 'Not specified' ? ' • 📍 ' + signup.city : ''}
+          </div>
+        </div>
+      `).join('')
+      
+      if (signups.length > 5) {
+        listElement.innerHTML += `<p class="text-center text-blue-600 text-xs mt-2">Showing latest 5 of ${signups.length} signups</p>`
+      }
+    }
+  }
+}
+
+// Refresh pilot data
+function refreshPilotData() {
+  displayPilotSignups()
+}
+
 // Initialize admin page if on admin route
 function initAdminPage() {
   if (window.location.pathname === '/admin') {
     displayUserData()
     showCurrentRecommendation()
+    displayPilotSignups()
   }
 }
 
@@ -562,7 +695,11 @@ window.koshDemo = {
   refreshData,
   clearUserData,
   exportData,
-  simulateUser
+  simulateUser,
+  handlePilotSignup,
+  getPilotSignups,
+  exportPilotSignups,
+  displayPilotSignups
 }
 
 console.log('Kosh Prototype v2 loaded successfully!')

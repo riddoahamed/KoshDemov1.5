@@ -72,6 +72,34 @@ export const AdminDataScreen = () => (
           </div>
         </div>
         
+        {/* Pilot Signups Section */}
+        <div class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+            <i class="fas fa-rocket mr-2 text-blue-500"></i>
+            Pilot Program Signups
+          </h2>
+          
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-sm font-medium text-blue-700">Total Signups:</span>
+              <span id="pilot-count" class="text-2xl font-bold text-blue-800">0</span>
+            </div>
+            
+            <div id="pilot-signups-list" class="space-y-2 mb-4 max-h-40 overflow-y-auto">
+              Loading pilot signups...
+            </div>
+            
+            <div class="flex gap-2">
+              <button onclick="refreshPilotData()" class="flex-1 bg-blue-500 text-white px-3 py-2 rounded text-sm hover:bg-blue-600">
+                <i class="fas fa-sync-alt mr-1"></i> Refresh
+              </button>
+              <button onclick="exportPilotSignups()" class="flex-1 bg-green-500 text-white px-3 py-2 rounded text-sm hover:bg-green-600">
+                <i class="fas fa-download mr-1"></i> Export CSV
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Age Recommendations Section */}
         <div class="mb-6">
           <h2 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
