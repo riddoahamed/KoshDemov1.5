@@ -25,21 +25,31 @@
 - Card 2: 🛡️ Safe & trusted (Licensed partners)
 - Card 3: 🌍 Made for Bangladesh (Familiar products)
 
-### 3. **Sign-up** (`/signup`)
-- Phone number input with +880 prefix
+### 3. **Enhanced Sign-up** (`/signup`)
+- **Required**: Phone number input with +880 prefix
+- **Optional**: Full name field for personalization
+- **Optional**: Age field (18-100) for smart investment recommendations
+- Form validation with clear error handling
 - Fake KYC simulation with auto-success OTP
-- Clear demo messaging
+- Helpful microcopy and field guidance
+- Clear demo messaging with required field indicators
 
 ### 4. **Home - Empty Portfolio** (`/home-empty`)
-- Personalized greeting: "Hi Ashraf, your portfolio is ready"
+- **Personalized greeting**: "Hi [Name], your portfolio is ready" (uses stored name)
 - ৳ 0 balance display
 - Call-to-action to explore products
+- Dynamic personalization based on signup data
 
-### 5. **Product Picker** (`/products`)
+### 5. **Smart Product Picker** (`/products`)
 - **🪙 Gold Saver**: Start from 1g (~৳ 5,000)
 - **🏦 DPS Builder**: Monthly from ৳ 500
 - **📊 Mutual Fund**: ৳ 5,000 lump sum or ৳ 1,000 SIP
 - Real minimum amounts with authentic badges
+- **💡 Age-Based Recommendations**: Personalized suggestions based on user age
+  - 18-25: Gold Saver (compound growth advantage)
+  - 26-35: DPS Builder (foundation building)
+  - 36-50: Mutual Fund (professional management)
+  - 50+: DPS Builder (steady returns)
 
 ### 6. **Product Details** (`/product-gold`, `/product-dps`, `/product-mutual`)
 - Detailed product information with mock performance charts
@@ -97,21 +107,28 @@
 ## 🏗️ Data Architecture
 
 ### **Data Models**
-- **User Profile**: Phone, name, authentication status
+- **Enhanced User Profile**: Phone (required), name (optional), age (optional), authentication status
+- **Personalization Engine**: Age-based investment recommendations and smart suggestions
 - **Portfolio**: Total balance, individual investments, performance tracking
 - **Investment Products**: Type (gold/dps/mutual), amounts, current values, change percentages  
 - **Weekly Updates**: Timeline data with performance metrics
+- **User Preferences**: Stored locally for demo personalization and recommendations
 
 ### **Storage Services**
 - **Frontend State**: Local JavaScript state management
+- **User Data**: LocalStorage for demo user personalization (name, age, preferences)
 - **Demo Data**: Hardcoded realistic portfolio and performance data
+- **Recommendation Engine**: Age-based smart suggestions and personalized content
 - **Future Enhancement**: Cloudflare D1 for user data, KV for session management
 
-### **Data Flow**
-1. User navigates through screens with JavaScript routing
-2. Investment selections update local state
-3. Portfolio calculations show realistic returns
-4. Weekly updates demonstrate transparency commitment
+### **Enhanced Data Flow**
+1. User completes signup with optional name/age for personalization
+2. User data stored locally for demo personalization across screens
+3. Age-based recommendations shown on products page
+4. Personalized greetings throughout the application
+5. Investment selections update local state
+6. Portfolio calculations show realistic returns
+7. Weekly updates demonstrate transparency commitment
 
 ## 🎨 Design & User Experience
 
