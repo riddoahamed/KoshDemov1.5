@@ -285,6 +285,9 @@ function initPage() {
     setTimeout(showAgeRecommendation, 100) // Small delay to ensure DOM is ready
   }
   
+  // Initialize admin page if needed
+  initAdminPage()
+  
   // Add smooth scrolling behavior
   document.documentElement.style.scrollBehavior = 'smooth'
 }
@@ -418,6 +421,134 @@ function showAgeRecommendation() {
   }
 }
 
+// Admin panel functions
+function refreshData() {
+  displayUserData()
+  showCurrentRecommendation()
+}
+
+function clearUserData() {
+  if (confirm('Are you sure you want to clear all user data?')) {
+    localStorage.removeItem('koshUserData')
+    alert('User data cleared!')
+    displayUserData()
+    showCurrentRecommendation()
+  }
+}
+
+function exportData() {
+  const userData = localStorage.getItem('koshUserData')
+  if (!userData) {
+    alert('No user data to export')
+    return
+  }
+  
+  const blob = new Blob([userData], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'kosh-user-data.json'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
+}
+
+function simulateUser() {
+  const sampleUsers = [
+    { phone: '1712345678', name: 'Ahmed Rahman', age: '28' },
+    { phone: '1823456789', name: 'Fatima Khan', age: '24' },
+    { phone: '1934567890', name: 'Mohammad Ali', age: '35' },
+    { phone: '1645678901', name: 'Rashida Begum', age: '45' }
+  ]
+  
+  const randomUser = sampleUsers[Math.floor(Math.random() * sampleUsers.length)]
+  localStorage.setItem('koshUserData', JSON.stringify(randomUser))
+  alert(`Added sample user: ${randomUser.name} (Age: ${randomUser.age})`)
+  displayUserData()
+  showCurrentRecommendation()
+}
+
+function displayUserData() {
+  const rawData = localStorage.getItem('koshUserData')
+  const rawDataElement = document.getElementById('raw-user-data')
+  const parsedDataElement = document.getElementById('parsed-user-data')
+  
+  if (rawDataElement) {
+    if (rawData) {
+      rawDataElement.textContent = rawData
+    } else {
+      rawDataElement.textContent = 'No user data stored'
+    }
+  }
+  
+  if (parsedDataElement) {
+    if (rawData) {
+      try {
+        const userData = JSON.parse(rawData)
+        parsedDataElement.innerHTML = `
+          <div class="grid grid-cols-1 gap-2">
+            <div class="flex justify-between p-2 bg-gray-100 rounded">
+              <span class="font-medium">Phone:</span>
+              <span>+880${userData.phone}</span>
+            </div>
+            <div class="flex justify-between p-2 bg-gray-100 rounded">
+              <span class="font-medium">Name:</span>
+              <span>${userData.name || 'Not provided'}</span>
+            </div>
+            <div class="flex justify-between p-2 bg-gray-100 rounded">
+              <span class="font-medium">Age:</span>
+              <span>${userData.age ? userData.age + ' years' : 'Not provided'}</span>
+            </div>
+          </div>
+        `
+      } catch (error) {
+        parsedDataElement.innerHTML = '<p class="text-red-500">Invalid JSON data</p>'
+      }
+    } else {
+      parsedDataElement.innerHTML = '<p class="text-gray-500">No data available</p>'
+    }
+  }
+}
+
+function showCurrentRecommendation() {
+  const recommendationElement = document.getElementById('current-recommendation')
+  if (recommendationElement) {
+    const recommendation = getAgeBasedRecommendation()
+    
+    if (recommendation) {
+      recommendationElement.innerHTML = `
+        <div class="flex items-start">
+          <div class="text-2xl mr-3">💡</div>
+          <div>
+            <h3 class="font-semibold text-yellow-800 mb-1">${recommendation.title}</h3>
+            <p class="text-yellow-700 mb-2">${recommendation.message}</p>
+            <span class="text-xs bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full">
+              Recommended: ${recommendation.recommended.toUpperCase()}
+            </span>
+          </div>
+        </div>
+      `
+    } else {
+      recommendationElement.innerHTML = `
+        <div class="text-center text-gray-500">
+          <i class="fas fa-user-plus text-2xl mb-2"></i>
+          <p>No age-based recommendation available</p>
+          <p class="text-sm">Add a user with age to see recommendations</p>
+        </div>
+      `
+    }
+  }
+}
+
+// Initialize admin page if on admin route
+function initAdminPage() {
+  if (window.location.pathname === '/admin') {
+    displayUserData()
+    showCurrentRecommendation()
+  }
+}
+
 // Expose demo data globally for debugging
 window.koshDemo = {
   portfolio: demoPortfolio,
@@ -426,7 +557,12 @@ window.koshDemo = {
   selectPaymentMethod,
   processPayment,
   personalizeGreeting,
-  getAgeBasedRecommendation
+  getAgeBasedRecommendation,
+  displayUserData,
+  refreshData,
+  clearUserData,
+  exportData,
+  simulateUser
 }
 
 console.log('Kosh Prototype v2 loaded successfully!')

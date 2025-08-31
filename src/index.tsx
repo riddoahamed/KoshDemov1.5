@@ -6,6 +6,7 @@ import {
   PortfolioScreen, UpdatesScreen, SupportScreen, 
   HomeWithPortfolioScreen 
 } from './screens'
+import { AdminDataScreen } from './admin'
 
 type AppData = {
   currentScreen: string
@@ -472,6 +473,10 @@ app.get('/support', (c) => {
 
 app.get('/home-with-portfolio', (c) => {
   return c.render(HomeWithPortfolioScreen())
+})
+
+app.get('/admin', (c) => {
+  return c.render(AdminDataScreen())
 })
 
 // API for pilot program signup (Google Form redirect)
