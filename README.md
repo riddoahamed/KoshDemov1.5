@@ -2,6 +2,17 @@
 
 **A comprehensive investment platform prototype designed specifically for Bangladesh, featuring authentic minimums and real product offerings.**
 
+## 🆕 **Latest Update: Goal Flow + Analytics + Legal**
+
+**New Features Added:**
+- **📋 60-Second Goal Flow**: Interactive form with goal selection (Gold/Mutual Fund/DPS), amount bands, timeline, and residence
+- **📊 PostHog Analytics**: Complete event tracking for user behavior and conversion optimization  
+- **🔒 Cloudflare Turnstile**: Bot protection on all forms
+- **💬 WhatsApp Integration**: Direct support channel with contextual user data
+- **⚖️ Legal Compliance**: Beta terms disclaimer and educational warnings
+- **💭 Feedback System**: Simple feedback collection with character limits
+- **🌐 Static Deployment**: Pure HTML/CSS/JS for maximum performance and reliability
+
 ## 🎯 Project Overview
 - **Name**: Kosh Prototype v2 
 - **Goal**: Democratize investing in Bangladesh with low minimum amounts and transparent processes
@@ -9,7 +20,11 @@
 - **Features**: DPS savings, Gold investment, Mutual funds with authentic minimum requirements
 
 ## 🌐 Live URLs
-- **Development**: https://3000-i3acxbhsppjceds9amqns-6532622b.e2b.dev
+- **🚀 Production**: https://f7fb4943.kosh-prototype.pages.dev
+- **🔗 Branch URL**: https://master.kosh-prototype.pages.dev  
+- **📱 Goal Flow Landing**: https://f7fb4943.kosh-prototype.pages.dev
+- **⚖️ Legal Disclaimer**: https://f7fb4943.kosh-prototype.pages.dev/legal/beta.html
+- **💬 Feedback Form**: https://f7fb4943.kosh-prototype.pages.dev/feedback/
 - **GitHub**: (Ready for deployment after repository setup)
 
 ## 📱 Complete Screen Flow (11 Screens)
@@ -207,17 +222,23 @@
 
 ### **Local Development**
 ```bash
+# Static HTML development (current setup)
 cd /home/user/webapp
+python3 -m http.server 8080
+
+# Or previous dynamic version
 npm run build
 pm2 start ecosystem.config.cjs
 ```
 
 ### **Production Deployment**
-Ready for Cloudflare Pages deployment with:
-- Environment variables for production settings
-- Custom domain configuration capability  
-- Edge performance optimization
-- Global CDN distribution
+✅ **Successfully deployed to Cloudflare Pages:**
+- **Platform**: Cloudflare Pages (Static HTML/CSS/JS)
+- **Status**: 🟢 Live and Active  
+- **Performance**: Global edge optimization with CDN
+- **URLs**: https://f7fb4943.kosh-prototype.pages.dev
+- **Environment Variables**: Configured for PostHog, Turnstile, WhatsApp
+- **Deployment**: `npx wrangler pages deploy . --project-name kosh-prototype`
 
 ### **Future Enhancements**
 - **Database Integration**: Cloudflare D1 for user data persistence
@@ -262,6 +283,6 @@ Ready for Cloudflare Pages deployment with:
 
 This Kosh Prototype v2 provides a complete, functional demonstration of a Bangladesh-focused investment platform. With authentic minimums, realistic data, and a polished user experience, it's ready to validate market demand and gather user feedback for building the actual product.
 
-**Live Demo**: https://3000-i3acxbhsppjceds9amqns-6532622b.e2b.dev
+**🌐 Live Production Demo**: https://f7fb4943.kosh-prototype.pages.dev
 
 **Last Updated**: December 2024
