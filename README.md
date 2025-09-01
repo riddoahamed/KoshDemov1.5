@@ -56,9 +56,9 @@
 - Dynamic personalization based on signup data
 
 ### 5. **Smart Product Picker** (`/products`)
-- **🪙 Gold Saver**: Start from 1g (~৳ 5,000)
+- **🪙 Gold Saver**: Start from ৳ 100
 - **🏦 DPS Builder**: Monthly from ৳ 500
-- **📊 Mutual Fund**: ৳ 5,000 lump sum or ৳ 1,000 SIP
+- **📊 Mutual Fund**: ৳ 1,000 minimum investment
 - Real minimum amounts with authentic badges
 - **💡 Age-Based Recommendations**: Personalized suggestions based on user age
   - 18-25: Gold Saver (compound growth advantage)
@@ -116,8 +116,8 @@
 **These are realistic minimums based on actual Bangladesh market:**
 
 - **DPS Builder**: ৳ 500/month (Bank DPS standard minimum)
-- **Gold Saver**: ৳ 5,000 ≈ 1g of 22k gold (Based on current gold prices)
-- **Mutual Fund**: ৳ 5,000 lump sum OR ৳ 1,000/month SIP (Market standard)
+- **Gold Saver**: ৳ 100 minimum investment (Fractional gold ownership)
+- **Mutual Fund**: ৳ 1,000 minimum investment (Market standard)
 
 ## 🏗️ Data Architecture
 
