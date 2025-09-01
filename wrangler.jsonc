@@ -1,34 +1,14 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "webapp",
+  "name": "kosh-prototype",
   "compatibility_date": "2025-08-31",
-  "pages_build_output_dir": "./dist",
+  "pages_build_output_dir": ".",
   "compatibility_flags": [
     "nodejs_compat"
   ]
-  // "vars": {
-  //   "MY_VAR": "my-variable"
-  // },
-  // "kv_namespaces": [
-  //   {
-  //     "binding": "MY_KV_NAMESPACE",
-  //     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  //   }
-  // ],
-  // "r2_buckets": [
-  //   {
-  //     "binding": "MY_BUCKET",
-  //     "bucket_name": "my-bucket"
-  //   }
-  // ],
-  // "d1_databases": [
-  //   {
-  //     "binding": "MY_DB",
-  //     "database_name": "my-database",
-  //     "database_id": ""
-  //   }
-  // ],
-  // "ai": {
-  //   "binding": "AI"
-  // }
+  // Environment variables to configure in Cloudflare Pages Settings:
+  // - PH_PROJECT_KEY: PostHog project key for analytics
+  // - CF_TURNSTILE_SITE_KEY: Turnstile site key for bot protection  
+  // - WHATSAPP_NUMBER: WhatsApp business number for support
+  // - CF_WEB_ANALYTICS_TOKEN: Web analytics beacon token
 }

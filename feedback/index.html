@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Kosh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'kosh-green': '#10B981',
+                        'kosh-dark': '#1F2937',
+                        'kosh-light': '#F9FAFB',
+                        'bd-green': '#006A4E',
+                        'bd-red': '#F42A35'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 font-sans min-h-screen">
+    <!-- Header -->
+    <div class="bg-white border-b">
+        <div class="max-w-md mx-auto px-4 py-6">
+            <div class="flex items-center">
+                <a href="/" class="text-kosh-green hover:text-green-600 mr-4">
+                    ← Back to Kosh
+                </a>
+                <h1 class="text-xl font-semibold text-gray-800">Feedback</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-md mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Help us improve</h2>
+                <p class="text-gray-600">Your feedback helps us build a better investment experience</p>
+            </div>
+
+            <!-- Minimal Tally Embed -->
+            <div class="space-y-6">
+                <form id="feedback-form" class="space-y-4">
+                    <div>
+                        <label for="confusion" class="block text-sm font-medium text-gray-700 mb-2">
+                            What confused you about Kosh? (Optional)
+                        </label>
+                        <textarea 
+                            id="confusion" 
+                            name="confusion" 
+                            maxlength="140" 
+                            rows="4"
+                            placeholder="Tell us what wasn't clear..."
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-kosh-green focus:ring-1 focus:ring-kosh-green resize-none"
+                        ></textarea>
+                        <div class="text-xs text-gray-500 text-right mt-1">
+                            <span id="char-count">0</span>/140 characters
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="contact-feedback" class="block text-sm font-medium text-gray-700 mb-2">
+                            Contact (Optional)
+                        </label>
+                        <input 
+                            type="text" 
+                            id="contact-feedback" 
+                            name="contact"
+                            placeholder="your@email.com or phone"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-kosh-green focus:ring-1 focus:ring-kosh-green"
+                        >
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="w-full bg-kosh-green text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors"
+                    >
+                        Send feedback
+                    </button>
+                </form>
+
+                <div id="success-message" class="hidden text-center py-8">
+                    <div class="text-green-600 text-4xl mb-4">✓</div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Thank you!</h3>
+                    <p class="text-gray-600 mb-4">Your feedback helps us improve Kosh for everyone.</p>
+                    <a href="/" class="text-kosh-green hover:underline">← Back to Kosh</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Feedback Options -->
+        <div class="mt-8 text-center">
+            <p class="text-sm text-gray-600 mb-4">Other ways to reach us:</p>
+            <div class="space-y-2">
+                <a href="mailto:feedback@kosh.app" class="block text-kosh-green hover:underline text-sm">
+                    📧 feedback@kosh.app
+                </a>
+                <a href="https://wa.me/WHATSAPP_NUMBER?text=Hi%20Kosh,%20I%20have%20feedback..." class="block text-kosh-green hover:underline text-sm">
+                    💬 WhatsApp feedback
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('feedback-form');
+            const textarea = document.getElementById('confusion');
+            const charCount = document.getElementById('char-count');
+            const successMessage = document.getElementById('success-message');
+
+            // Character counter
+            textarea.addEventListener('input', function() {
+                const count = this.value.length;
+                charCount.textContent = count;
+                
+                if (count > 140) {
+                    charCount.classList.add('text-red-500');
+                } else {
+                    charCount.classList.remove('text-red-500');
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const confusion = textarea.value.trim();
+                const contact = document.getElementById('contact-feedback').value.trim();
+
+                // Simple validation
+                if (confusion.length > 140) {
+                    alert('Please keep your feedback under 140 characters.');
+                    return;
+                }
+
+                // Store feedback (in real implementation, this would send to server)
+                const feedback = {
+                    confusion: confusion,
+                    contact: contact,
+                    timestamp: new Date().toISOString(),
+                    page: 'feedback'
+                };
+
+                // Store locally for demo purposes
+                let storedFeedback = JSON.parse(localStorage.getItem('kosh_feedback') || '[]');
+                storedFeedback.push(feedback);
+                localStorage.setItem('kosh_feedback', JSON.stringify(storedFeedback));
+
+                // Track with PostHog if available
+                if (typeof posthog !== 'undefined') {
+                    posthog.capture('feedback_submitted', {
+                        has_confusion: !!confusion,
+                        has_contact: !!contact,
+                        source: 'feedback_page'
+                    });
+                }
+
+                // Show success message
+                form.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
