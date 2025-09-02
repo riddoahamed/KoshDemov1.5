@@ -18,6 +18,9 @@ export const AddMoneyScreen = () => (
         
         {/* Amount Chips */}
         <div class="grid grid-cols-3 gap-3 mb-6">
+          <button onclick="selectAmount(100)" class="amount-chip border-2 border-gray-200 rounded-lg py-3 px-4 text-center font-semibold text-gray-700 hover:border-kosh-green hover:text-kosh-green transition-colors">
+            ৳ 100
+          </button>
           <button onclick="selectAmount(500)" class="amount-chip border-2 border-gray-200 rounded-lg py-3 px-4 text-center font-semibold text-gray-700 hover:border-kosh-green hover:text-kosh-green transition-colors">
             ৳ 500
           </button>
@@ -38,7 +41,7 @@ export const AddMoneyScreen = () => (
                    id="custom-amount"
                    class="w-full pl-8 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-kosh-green focus:border-kosh-green"
                    placeholder="Enter amount"
-                   min="500" />
+                   min="100" />
           </div>
         </div>
       </div>

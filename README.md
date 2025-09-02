@@ -20,11 +20,11 @@
 - **Features**: DPS savings, Gold investment, Mutual funds with authentic minimum requirements
 
 ## 🌐 Live URLs
-- **🚀 Production**: https://7ea96c76.kosh-prototype.pages.dev
+- **🚀 Production**: https://1d9b74b9.kosh-prototype.pages.dev
 - **🔗 Branch URL**: https://master.kosh-prototype.pages.dev  
-- **📱 Goal Flow Landing**: https://7ea96c76.kosh-prototype.pages.dev
-- **⚖️ Legal Disclaimer**: https://7ea96c76.kosh-prototype.pages.dev/legal/beta.html
-- **💬 Feedback Form**: https://7ea96c76.kosh-prototype.pages.dev/feedback/
+- **📱 Original 11-Screen Prototype**: https://1d9b74b9.kosh-prototype.pages.dev
+- **📱 Products Screen**: https://1d9b74b9.kosh-prototype.pages.dev/products
+- **👨‍💼 Admin Panel**: https://1d9b74b9.kosh-prototype.pages.dev/admin
 - **🐙 GitHub**: https://github.com/riddoahamed/KoshDemov1.5
 
 ## 📱 Complete Screen Flow (11 Screens)
@@ -236,7 +236,7 @@ pm2 start ecosystem.config.cjs
 - **Platform**: Cloudflare Pages (Static HTML/CSS/JS)
 - **Status**: 🟢 Live and Active  
 - **Performance**: Global edge optimization with CDN
-- **URLs**: https://7ea96c76.kosh-prototype.pages.dev
+- **URLs**: https://1d9b74b9.kosh-prototype.pages.dev
 - **Environment Variables**: Configured for PostHog, Turnstile, WhatsApp
 - **Deployment**: `npx wrangler pages deploy . --project-name kosh-prototype`
 
@@ -283,6 +283,6 @@ pm2 start ecosystem.config.cjs
 
 This Kosh Prototype v2 provides a complete, functional demonstration of a Bangladesh-focused investment platform. With authentic minimums, realistic data, and a polished user experience, it's ready to validate market demand and gather user feedback for building the actual product.
 
-**🌐 Live Production Demo**: https://7ea96c76.kosh-prototype.pages.dev
+**🌐 Live Production Demo**: https://1d9b74b9.kosh-prototype.pages.dev
 
 **Last Updated**: December 2024

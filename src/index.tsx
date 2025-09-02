@@ -52,7 +52,7 @@ const SplashScreen = () => (
       </div>
       <h2 class="text-2xl font-semibold mb-4">Investing for the 99%</h2>
       <p class="text-lg text-green-100 mb-8 leading-relaxed">
-        Start from as little as BDT 500.<br/>
+        Start from as little as ৳ 100.<br/>
         Safe. Transparent. Simple.
       </p>
       <button onclick="navigateToScreen('onboarding')" 
@@ -274,10 +274,10 @@ const ProductsScreen = () => (
           <div class="flex-1">
             <h3 class="text-lg font-semibold text-gray-800 mb-2">Gold Saver</h3>
             <p class="text-gray-600 text-sm leading-relaxed">
-              Start from 1g (~৳ 5,000). Track against global gold price.
+              Start from ৳ 100. Track against global gold price with fractional ownership.
             </p>
             <div class="mt-3 flex items-center text-xs text-yellow-700">
-              <span class="bg-yellow-200 px-2 py-1 rounded-full">Min: ৳ 5,000</span>
+              <span class="bg-yellow-200 px-2 py-1 rounded-full">Min: ৳ 100</span>
               <span class="ml-2">22k Gold • Digital</span>
             </div>
           </div>
@@ -310,10 +310,10 @@ const ProductsScreen = () => (
           <div class="flex-1">
             <h3 class="text-lg font-semibold text-gray-800 mb-2">Mutual Fund</h3>
             <p class="text-gray-600 text-sm leading-relaxed">
-              Diversified, professional. Start from ৳ 5,000 lump sum or ৳ 1,000/month SIP.
+              Diversified, professional. Start from ৳ 1,000 minimum investment.
             </p>
             <div class="mt-3 flex items-center text-xs text-purple-700">
-              <span class="bg-purple-200 px-2 py-1 rounded-full">Min: ৳ 5,000 or ৳ 1,000 SIP</span>
+              <span class="bg-purple-200 px-2 py-1 rounded-full">Min: ৳ 1,000</span>
               <span class="ml-2">Diversified • Professional</span>
             </div>
           </div>
@@ -331,7 +331,7 @@ function ProductDetailScreen(productType: 'gold' | 'dps' | 'mutual') {
       title: 'Gold Saver',
       emoji: '🪙',
       description: 'Certified 22k gold, digital savings, withdraw as cash or gold.',
-      minAmount: '৳ 5,000',
+      minAmount: '৳ 100',
       gradient: 'from-yellow-50 to-yellow-100',
       border: 'border-yellow-200',
       buttonColor: 'bg-yellow-600 hover:bg-yellow-700'
@@ -348,8 +348,8 @@ function ProductDetailScreen(productType: 'gold' | 'dps' | 'mutual') {
     mutual: {
       title: 'Mutual Fund',
       emoji: '📊', 
-      description: 'Diversified portfolio. Start with 5,000 one-time or 1,000/month via SIP.',
-      minAmount: '৳ 5,000 or ৳ 1,000 SIP',
+      description: 'Diversified portfolio. Start with ৳ 1,000 minimum investment.',
+      minAmount: '৳ 1,000',
       gradient: 'from-purple-50 to-purple-100',
       border: 'border-purple-200',
       buttonColor: 'bg-purple-600 hover:bg-purple-700'
